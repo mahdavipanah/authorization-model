@@ -1,3 +1,5 @@
+![Authorization model header](public/readme-header.png)
+
 # Authorization Model Specification
 
 This repository contains a **portable, normative specification** for how authorization decisions are expressed and evaluated. Any application or service may adopt it; the canonical document is [`authorization-spec.md`](authorization-spec.md).
