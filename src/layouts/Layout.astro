@@ -1,35 +1,111 @@
 ---
+import '../styles/spec-theme.css';
+import { specMeta } from '../lib/spec-meta';
+
 interface Props {
 	title?: string;
+	description?: string;
 }
 
-const { title = 'Authorization Model' } = Astro.props;
+const {
+	title = specMeta.title,
+	description = specMeta.description,
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Newsreader:opsz,wght,ital@6..72,200..800,0;6..72,200..800,1&family=JetBrains+Mono:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<slot />
+		<a class="skip" href="#content">Skip to content</a>
+
+		<header class="masthead">
+			<div class="masthead-inner">
+				<div class="top-row">
+					<span class="doc-mark">{specMeta.docMark}</span>
+					<div class="controls">
+						<button class="control" id="theme-toggle" type="button" aria-label="Toggle color theme">
+							Theme
+						</button>
+						<button
+							class="control"
+							type="button"
+							onclick="window.print()"
+							aria-label="Print specification"
+						>
+							Print
+						</button>
+					</div>
+				</div>
+
+				<div class="title-block">
+					<h1 class="title">
+						Authorization<br />Model Specification
+					</h1>
+					<p class="subtitle">{specMeta.subtitle}</p>
+				</div>
+
+				<div class="meta-strip">
+					<div class="meta-item">
+						<span class="meta-label">Version</span>
+						<span class="meta-value">{specMeta.version}</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Status</span>
+						<span class="meta-value">{specMeta.status}</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Published</span>
+						<span class="meta-value">{specMeta.published}</span>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main id="content" class="spec-main">
+			<slot />
+		</main>
+
+		<footer>
+			<div class="footer-inner">
+				<span>End of specification · v{specMeta.version}</span>
+				<span>Published {specMeta.published}</span>
+			</div>
+		</footer>
+
+		<script>
+			(function () {
+				const root = document.documentElement;
+				const btn = document.getElementById('theme-toggle');
+				if (!btn) return;
+
+				const stored = localStorage.getItem('theme');
+				if (stored) root.setAttribute('data-theme', stored);
+
+				btn.addEventListener('click', () => {
+					const current =
+						root.getAttribute('data-theme') ||
+						(matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+					const next = current === 'dark' ? 'light' : 'dark';
+					root.setAttribute('data-theme', next);
+					localStorage.setItem('theme', next);
+				});
+			})();
+		</script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		min-height: 100%;
-		font-family:
-			Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		background: #ffffff;
-		color: #0f172a;
-	}
-</style>
