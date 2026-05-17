@@ -1,4 +1,4 @@
-![Authorization model header](public/readme-header.png)
+<img src="public/readme-header.png" alt="Authorization model header" width="640">
 
 # Authorization Model Specification
 
