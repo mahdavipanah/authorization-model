@@ -8,7 +8,7 @@
 
 ## 1. Purpose
 
-This specification defines how authorization decisions are expressed and evaluated within the platform. It establishes:
+This specification defines how authorization decisions are expressed and evaluated in systems that adopt this model. It establishes:
 
 - the structure of roles and the permission statements they contain;
 - the principals to which roles may be bound;
@@ -84,7 +84,7 @@ A role bound at a broader tier takes effect in every scope nested within it. A r
 
 ### 4.3 Role
 
-A named bundle of permission statements that expresses a job function or capability set — for example, `auditor`, `survey-editor`, `billing-admin`.
+A named bundle of permission statements that expresses a job function or capability set — for example, `auditor`, `editor`, `billing-admin`.
 
 Each role has:
 
@@ -172,7 +172,7 @@ identifier       = ( letter | digit | "_" | "-" )+ ;
 
 ```
 
-Non-capturing groups have been used around the optional segments; behaviour is otherwise unchanged from prior versions.
+Non-capturing groups enclose the optional segments.
 
 ---
 
@@ -244,7 +244,7 @@ Every authorization decision should be logged with at least:
 - the decision returned;
 - the binding(s) that produced the deciding statement(s).
 
-Logs **must not** contain the user's bearer token. Where the resource URI may contain personal data, the team's standard PII handling rules apply before persistence.
+Logs **must not** contain the user's bearer token. Where the resource URI may contain personal data, implementers should apply their organization's privacy and data-retention policies before persistence.
 
 ---
 
@@ -252,7 +252,7 @@ Logs **must not** contain the user's bearer token. Where the resource URI may co
 
 The permission string format is itself a contract. Breaking changes — adding required segments, changing delimiters, redefining the effect set — require a version bump and a migration plan.
 
-This document is **v2.0**. Implementations must reject permission strings whose form does not match the regex in §5.5 rather than guess at intent.
+This document is **v1.0**. Implementations must reject permission strings whose form does not match the regex in §5.5 rather than guess at intent.
 
 ---
 

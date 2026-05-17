@@ -1,10 +1,10 @@
 # Authorization Model Specification
 
-This repository publishes a **normative specification** for how authorization decisions are expressed and evaluated on the platform. The canonical document is [`authorization-model.md`](authorization-model.md).
+This repository contains a **portable, normative specification** for how authorization decisions are expressed and evaluated. Any application or service may adopt it; the canonical document is [`authorization-model.md`](authorization-model.md).
 
 ## What this specification defines
 
-The spec covers roles, permissions, and policy evaluation. It is intended for implementers of Policy Decision Points (PDPs), Policy Enforcement Points (PEPs), and operators who define or audit access control.
+The spec covers roles, permissions, and policy evaluation. It is intended for teams building Policy Decision Points (PDPs), Policy Enforcement Points (PEPs), or operators who define or audit access control in their own systems.
 
 **In scope:**
 
@@ -37,7 +37,7 @@ Core entities:
 
 - **Principal** — `user`, `service_account`, or `client`
 - **Scope** — built-in, organization, or project tier (roles apply within a scope and inherit downward)
-- **Role** — named bundle of permission statements (e.g. `auditor`, `survey-editor`)
+- **Role** — named bundle of permission statements (e.g. `auditor`, `editor`, `billing-admin`)
 - **Binding** — explicit `(principal, role, scope)` assignment; nothing else confers permissions
 - **Permission statement** — atomic claim targeting organization, service, resource, optional field/ID, effect, and action
 
