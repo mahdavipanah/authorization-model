@@ -1,46 +1,31 @@
-# Astro Starter Kit: Basics
+# Authorization Model Site
 
-```sh
-npm create astro@latest -- --template basics
-```
+This repository renders `authorization-model.md` as a static HTML page using Astro and deploys it to GitHub Pages with GitHub Actions.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## How It Works
 
-## 🚀 Project Structure
+- `authorization-model.md` is the source-of-truth spec file.
+- `src/pages/index.astro` reads that file and converts markdown to HTML at build time.
+- `.github/workflows/deploy.yml` builds and deploys `dist/` to GitHub Pages when you push to `main`.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Local Development
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+- Install dependencies: `npm install`
+- Start dev server: `npm run dev`
+- Build production output: `npm run build`
+- Preview build locally: `npm run preview`
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Publishing on GitHub Pages
 
-## 🧞 Commands
+1. Create a GitHub repository and push this project to the `main` branch.
+2. In GitHub, open **Settings > Pages**.
+3. Set **Source** to **GitHub Actions**.
+4. Push a commit to `main` (or run the workflow manually from the Actions tab).
+5. After deploy finishes, your site will be available at:
+   - `https://<github-username>.github.io/<repository-name>/`
 
-All commands are run from the root of the project, from a terminal:
+## Updating the Spec
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. Edit `authorization-model.md`.
+2. Commit and push your changes.
+3. GitHub Actions rebuilds and republishes the site automatically.

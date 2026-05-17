@@ -1,11 +1,54 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import Layout from '../layouts/Layout.astro';
+import { marked } from 'marked';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const markdownPath = path.resolve(process.cwd(), 'authorization-model.md');
+const markdownContent = await fs.readFile(markdownPath, 'utf8');
+const htmlContent = marked.parse(markdownContent);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Authorization Model Specification">
+	<main class="spec">
+		<article set:html={htmlContent} />
+	</main>
 </Layout>
+
+<style>
+	.spec {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 2rem 1.25rem 3rem;
+	}
+
+	:global(article h1),
+	:global(article h2),
+	:global(article h3) {
+		line-height: 1.25;
+	}
+
+	:global(article p),
+	:global(article li) {
+		line-height: 1.65;
+	}
+
+	:global(article code) {
+		background: #f2f4f7;
+		padding: 0.1rem 0.35rem;
+		border-radius: 0.25rem;
+	}
+
+	:global(article pre) {
+		background: #0f172a;
+		color: #e2e8f0;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		overflow-x: auto;
+	}
+
+	:global(article pre code) {
+		background: transparent;
+		padding: 0;
+	}
+</style>
