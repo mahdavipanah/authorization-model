@@ -1,4 +1,6 @@
-<img src="public/readme-header.png" alt="Authorization model header" width="640">
+<p align="center">
+  <img src="public/readme-header.png" alt="Authorization model header" width="480">
+</p>
 
 # Authorization Model Specification
 
