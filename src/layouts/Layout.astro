@@ -1,16 +1,12 @@
 ---
 import '../styles/spec-theme.css';
-import { specMeta } from '../lib/spec-meta';
+import type { SpecMeta } from '../lib/spec-meta';
 
 interface Props {
-	title?: string;
-	description?: string;
+	meta: SpecMeta;
 }
 
-const {
-	title = specMeta.title,
-	description = specMeta.description,
-} = Astro.props;
+const { meta } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,8 +15,8 @@ const {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="color-scheme" content="light dark" />
-		<title>{title}</title>
-		<meta name="description" content={description} />
+		<title>{meta.title}</title>
+		<meta name="description" content={meta.description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
@@ -37,7 +33,7 @@ const {
 		<header class="masthead">
 			<div class="masthead-inner">
 				<div class="top-row">
-					<span class="doc-mark">{specMeta.docMark}</span>
+					<span class="doc-mark">{meta.docMark}</span>
 					<div class="controls">
 						<button class="control" id="theme-toggle" type="button" aria-label="Toggle color theme">
 							Theme
@@ -55,24 +51,35 @@ const {
 
 				<div class="title-block">
 					<h1 class="title">
-						Authorization<br />Model Specification
+						{meta.titleLines.map((line, index) => (
+							<>
+								{index > 0 && <br />}
+								{line}
+							</>
+						))}
 					</h1>
-					<p class="subtitle">{specMeta.subtitle}</p>
+					{meta.subtitle && <p class="subtitle">{meta.subtitle}</p>}
 				</div>
 
 				<div class="meta-strip">
-					<div class="meta-item">
-						<span class="meta-label">Version</span>
-						<span class="meta-value">{specMeta.version}</span>
-					</div>
-					<div class="meta-item">
-						<span class="meta-label">Status</span>
-						<span class="meta-value">{specMeta.status}</span>
-					</div>
-					<div class="meta-item">
-						<span class="meta-label">Published</span>
-						<span class="meta-value">{specMeta.published}</span>
-					</div>
+					{meta.version && (
+						<div class="meta-item">
+							<span class="meta-label">Version</span>
+							<span class="meta-value">{meta.version}</span>
+						</div>
+					)}
+					{meta.status && (
+						<div class="meta-item">
+							<span class="meta-label">Status</span>
+							<span class="meta-value">{meta.status}</span>
+						</div>
+					)}
+					{meta.published && (
+						<div class="meta-item">
+							<span class="meta-label">Published</span>
+							<span class="meta-value">{meta.published}</span>
+						</div>
+					)}
 				</div>
 			</div>
 		</header>
@@ -83,8 +90,8 @@ const {
 
 		<footer>
 			<div class="footer-inner">
-				<span>End of specification · v{specMeta.version}</span>
-				<span>Published {specMeta.published}</span>
+				<span>End of specification · v{meta.version}</span>
+				{meta.published && <span>Published {meta.published}</span>}
 			</div>
 		</footer>
 

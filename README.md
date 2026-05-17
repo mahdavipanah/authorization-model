@@ -1,6 +1,6 @@
 # Authorization Model Specification
 
-This repository contains a **portable, normative specification** for how authorization decisions are expressed and evaluated. Any application or service may adopt it; the canonical document is [`authorization-model.md`](authorization-model.md).
+This repository contains a **portable, normative specification** for how authorization decisions are expressed and evaluated. Any application or service may adopt it; the canonical document is [`authorization-spec.md`](authorization-spec.md).
 
 ## What this specification defines
 
@@ -47,14 +47,14 @@ Permissions use a compact string grammar (suitable for JWT claims) and are evalu
 
 | Path | Purpose |
 | --- | --- |
-| `authorization-model.md` | Source-of-truth specification |
+| `authorization-spec.md` | Source-of-truth specification |
 | `src/pages/index.astro` | Renders the spec as HTML at build time |
 | `.github/workflows/deploy.yml` | Builds and deploys to GitHub Pages on push to `main` |
 
 ## Reading and editing the spec
 
-- **Read:** open [`authorization-model.md`](authorization-model.md) in this repo, or use the published site after deployment (see below).
-- **Change:** edit `authorization-model.md`, commit, and push; the site rebuilds automatically when GitHub Actions is configured.
+- **Read:** open [`authorization-spec.md`](authorization-spec.md) in this repo, or use the published site after deployment (see below).
+- **Change:** edit `authorization-spec.md`, commit, and push; the site rebuilds automatically when GitHub Actions is configured.
 
 ## Site rendering and deployment
 
@@ -62,7 +62,7 @@ This repo also includes a small [Astro](https://astro.build/) site that turns th
 
 ### How it works
 
-- `authorization-model.md` is the single source of truth.
+- `authorization-spec.md` is the single source of truth.
 - `src/pages/index.astro` reads that file and converts markdown to HTML at build time.
 - `.github/workflows/deploy.yml` builds `dist/` and deploys to GitHub Pages when you push to `main`.
 

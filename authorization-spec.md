@@ -1,9 +1,12 @@
-# Authorization Model Specification
-
-*Roles, permissions, and policy evaluation*
-
-**Version 1.0**
-
+---
+title: Authorization Model Specification
+titleLines: Authorization|Model Specification
+subtitle: Roles, permissions, and policy evaluation.
+docMark: Technical Specification
+version: "1.0"
+status: Initial
+published: May 17, 2026
+description: Specification defining how authorization decisions are expressed and evaluated — roles, permissions, scopes, and policy evaluation.
 ---
 
 ## 1. Purpose
@@ -259,4 +262,3 @@ This document is **v1.0**. Implementations must reject permission strings whose 
 ## 11. Changelog
 
 - **v1.0** — May 17, 2026 — Initial version.
-
